@@ -61,15 +61,15 @@ All you'll need is your:
 Code Attribution
 *****************
 
-1.) How To Use Abstract Classes: https://www.w3schools.com/cs/cs_abstract.php (Accessed: 05/09/2022)
-2.) How To Create and Read and Write From Array Lists: https://www.tutorialsteacher.com/csharp/csharp-arraylist (Accessed: 05/09/2022)
-2.) Efficient While Loops: https://www.w3schools.com/cs/cs_while_loop.php (Accessed: 05/09/2022)
-3.) Efficient For Loops: https://www.w3schools.com/cs/cs_for_loop.php (Accessed: 05/10/2022)
-2.) Multithreading and Making Threads Sleep: https://docs.microsoft.com/en-us/dotnet/api/system.threading.thread.sleep?view=net-6.0 (Accessed: 05/10/2022)
+- 1.) How To Use Abstract Classes: https://www.w3schools.com/cs/cs_abstract.php (Accessed: 05/09/2022)
+- 2.) How To Create and Read and Write From Array Lists: https://www.tutorialsteacher.com/csharp/csharp-arraylist (Accessed: 05/09/2022)
+- 2.) Efficient While Loops: https://www.w3schools.com/cs/cs_while_loop.php (Accessed: 05/09/2022)
+- 3.) Efficient For Loops: https://www.w3schools.com/cs/cs_for_loop.php (Accessed: 05/10/2022)
+- 2.) Multithreading and Making Threads Sleep: https://docs.microsoft.com/en-us/dotnet/api/system.threading.thread.sleep?view=net-6.0 (Accessed: 05/10/2022)
 
 *****************
 GitHub
 *****************
 
-1.) Repository: https://github.com/Noisyninja703/PROG6221_POE_Part1_ST10084225.git
-2.) KanBan: https://github.com/Noisyninja703/PROG6221_POE_Part1_ST10084225/projects/2
+- 1.) Repository: https://github.com/Noisyninja703/PROG6221_POE_Part1_ST10084225.git
+- 2.) KanBan: https://github.com/Noisyninja703/PROG6221_POE_Part1_ST10084225/projects/2
