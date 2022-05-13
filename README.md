@@ -1,8 +1,8 @@
-PROG6221_POE_Part1_ST10084225
+**PROG6221_POE_Part1_ST10084225**
 
-*****************
+*******************
 Introduction
-*****************
+*******************
 
 I was tasked with designing and developing a budget planning console app for a friend at campus, who needs assistance planning their spending for the month. The app requires their gross monthly income before deductions, their estimated taxes for the month, their estimated grocery expenses, their estimated water and lights expenses, their estimated travel cost(including fuel) expenses, their cellphone and telephone billing expenses, and any other expenses they might have for the month. Along with this the app needs to know if the user will be renting accommodation or buying a property with a home loan. if their renting, it only requires the monthly rental fee,
 if their buying property however, the app will require the purchase price of the house, the total deposit paid, the annual interest rate of the loan, and the number of months given to repay the loan.
@@ -24,17 +24,17 @@ Using this information, the app will produce the following:
 
 2.) Using their gross salary and the values given for their home loan, the app will give an estimate as too whether the user is likely to be approved for the loan or not, if the users monthly home loan repayment cost more than a third of their gross salary, the app will notify the user that the home loan is not likely to be approved.
 
-*****************
+*******************
 Software specs
-*****************
+*******************
 
 - Visual Studio 2022 Version 17.1.0
 - Sublime Text Stable Channel, Build 4126
 - Github Version 3.5.0
 
-*****************
+*******************
 F.A.Q
-*****************
+*******************
 
 1.) What information will i need too use this app?
 All you'll need is your:
@@ -57,9 +57,9 @@ All you'll need is your:
 4.) What do i do if i enter invalid information
 - If you enter any invalid information, the app will recognize this and prompt you to enter the information again.
 
-*****************
+*******************
 Code Attribution
-*****************
+*******************
 
 - 1.) How To Use Abstract Classes: https://www.w3schools.com/cs/cs_abstract.php (Accessed: 05/09/2022)
 - 2.) How To Create and Read and Write From Array Lists: https://www.tutorialsteacher.com/csharp/csharp-arraylist (Accessed: 05/09/2022)
@@ -67,9 +67,9 @@ Code Attribution
 - 4.) Efficient For Loops: https://www.w3schools.com/cs/cs_for_loop.php (Accessed: 05/10/2022)
 - 5.) Multithreading and Making Threads Sleep: https://docs.microsoft.com/en-us/dotnet/api/system.threading.thread.sleep?view=net-6.0 (Accessed: 05/10/2022)
 
-*****************
+*******************
 GitHub
-*****************
+*******************
 
 - 1.) Repository: https://github.com/Noisyninja703/PROG6221_POE_Part1_ST10084225.git
 - 2.) KanBan: https://github.com/Noisyninja703/PROG6221_POE_Part1_ST10084225/projects/2
