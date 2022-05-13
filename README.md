@@ -8,6 +8,7 @@ I was tasked with designing and developing a budget planning console app for a f
 if their buying property however, the app will require the purchase price of the house, the total deposit paid, the annual interest rate of the loan, and the number of months given to repay the loan.
 
 Using this information, the app will produce the following:
+
 1.) A budget report containing:
 - Their gross salary before tax.
 - Their estimated taxes for the month.
@@ -37,7 +38,9 @@ Using this information, the app will produce the following:
 *******************
 
 1.) What information will i need too use this app?
+
 All you'll need is your:
+
 - Gross monthly income before deductions.
 - Estimated taxes for the month.
 - Estimated grocery expenses for the month.
@@ -49,12 +52,15 @@ All you'll need is your:
 - If you are buying property, the app will require the purchase price of the house, the total deposit paid, the annual interest rate of the loan, and the number of months given to repay the loan.
 
 2.) What number notation should i use while entering the information?
+
 - You can use comma notation(0,00) or you can use fullstop notation(0.00)
 
 3.) How does the app estimate whether my home loan is likely to be approved?
+
 - The app simply checks if your monthly home loan repayments cost more than a third of your gross salary, if so the app will notify you that your home loan is unlikely to be approved.
 
 4.) What do i do if i enter invalid information?
+
 - If you enter any invalid information, the app will recognize this and prompt you to enter the information again.
 
 *******************
