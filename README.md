@@ -33,7 +33,7 @@ Using this information, the app will produce the following:
 
 2.) Sublime Text Stable Channel, Build 4126
 
-3.) Github Version 3.5.0
+3.) GitHub Version 3.5.0
 
 *******************
 **F.A.Q**
