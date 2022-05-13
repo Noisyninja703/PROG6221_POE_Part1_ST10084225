@@ -1,7 +1,7 @@
 **PROG6221_POE_Part1_ST10084225**
 
 *******************
-Introduction
+**Introduction**
 *******************
 
 I was tasked with designing and developing a budget planning console app for a friend at campus, who needs assistance planning their spending for the month. The app requires their gross monthly income before deductions, their estimated taxes for the month, their estimated grocery expenses, their estimated water and lights expenses, their estimated travel cost(including fuel) expenses, their cellphone and telephone billing expenses, and any other expenses they might have for the month. Along with this the app needs to know if the user will be renting accommodation or buying a property with a home loan. if their renting, it only requires the monthly rental fee,
@@ -25,7 +25,7 @@ Using this information, the app will produce the following:
 2.) Using their gross salary and the values given for their home loan, the app will give an estimate as too whether the user is likely to be approved for the loan or not, if the users monthly home loan repayment cost more than a third of their gross salary, the app will notify the user that the home loan is not likely to be approved.
 
 *******************
-Software specs
+**Software specs**
 *******************
 
 - Visual Studio 2022 Version 17.1.0
@@ -33,7 +33,7 @@ Software specs
 - Github Version 3.5.0
 
 *******************
-F.A.Q
+**F.A.Q**
 *******************
 
 1.) What information will i need too use this app?
@@ -58,7 +58,7 @@ All you'll need is your:
 - If you enter any invalid information, the app will recognize this and prompt you to enter the information again.
 
 *******************
-Code Attribution
+**Code Attribution**
 *******************
 
 - 1.) How To Use Abstract Classes: https://www.w3schools.com/cs/cs_abstract.php (Accessed: 05/09/2022)
@@ -68,7 +68,7 @@ Code Attribution
 - 5.) Multithreading and Making Threads Sleep: https://docs.microsoft.com/en-us/dotnet/api/system.threading.thread.sleep?view=net-6.0 (Accessed: 05/10/2022)
 
 *******************
-GitHub
+**GitHub**
 *******************
 
 - 1.) Repository: https://github.com/Noisyninja703/PROG6221_POE_Part1_ST10084225.git
