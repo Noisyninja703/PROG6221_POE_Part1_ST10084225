@@ -1,0 +1,8 @@
+C:\Users\sivan\source\repos\PROG6221_POE_Part_1\obj\Debug\PROG6221_POE_Part_1.csproj.AssemblyReference.cache
+C:\Users\sivan\source\repos\PROG6221_POE_Part_1\obj\Debug\PROG6221_POE_Part_1.csproj.SuggestedBindingRedirects.cache
+C:\Users\sivan\source\repos\PROG6221_POE_Part_1\obj\Debug\PROG6221_POE_Part_1.csproj.CoreCompileInputs.cache
+C:\Users\sivan\source\repos\PROG6221_POE_Part_1\bin\Debug\PROG6221_POE_Part_1.exe.config
+C:\Users\sivan\source\repos\PROG6221_POE_Part_1\bin\Debug\PROG6221_POE_Part_1.exe
+C:\Users\sivan\source\repos\PROG6221_POE_Part_1\bin\Debug\PROG6221_POE_Part_1.pdb
+C:\Users\sivan\source\repos\PROG6221_POE_Part_1\obj\Debug\PROG6221_POE_Part_1.exe
+C:\Users\sivan\source\repos\PROG6221_POE_Part_1\obj\Debug\PROG6221_POE_Part_1.pdb
