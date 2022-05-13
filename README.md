@@ -54,7 +54,7 @@ All you'll need is your:
 3.) How does the app estimate whether my home loan is likely to be approved?
 - The app simply checks if your monthly home loan repayments cost more than a third of your gross salary, if so the app will notify you that your home loan is unlikely to be approved.
 
-4.) What do i do if i enter invalid information
+4.) What do i do if i enter invalid information?
 - If you enter any invalid information, the app will recognize this and prompt you to enter the information again.
 
 *******************
