@@ -25,7 +25,7 @@ namespace PROG6221_POE_Part_1
         //**************************************************************      Main      *****************************************************************************************
 
         static void Main(string[] args)
-        {         
+        {
 
             //Create an object to call the display menthod
             Program main = new Program();
@@ -72,7 +72,7 @@ namespace PROG6221_POE_Part_1
 
                     bInvalid = true;
 
-                //Error message
+                    //Error message
                     ErrorMessgae();
 
                     Console.Write("*****************************************************************" + "\n" +
@@ -136,7 +136,7 @@ namespace PROG6221_POE_Part_1
             while (!double.TryParse(Console.ReadLine(), out grossSalary))
             {
 
-            //Error message
+                //Error message
                 ErrorMessgae();
 
                 Console.WriteLine("Please Enter A Valid Numerical Value For Salary \n");
@@ -758,13 +758,13 @@ namespace PROG6221_POE_Part_1
             populateArray.arrayExpenseName.Add("Accommodation Monthly Rental Fee");
             populateArray.arrayExpenseCost.Add(rentalAmount);
 
-        //Call the BudgetReport method
+            //Call the BudgetReport method
             BudgetReport();
         }
 
-//**************************************************************      Budget Report      *****************************************************************************************
+        //**************************************************************      Budget Report      *****************************************************************************************
 
-    //Create the budget report method
+        //Create the budget report method
         public void BudgetReport()
         {
 
@@ -788,13 +788,13 @@ namespace PROG6221_POE_Part_1
             }
 
             Console.WriteLine("*****************************************************************\n");
-            Console.WriteLine("Your Total Expenses Come Too: R" + populateArray.sumArray());
+            Console.WriteLine("Your Total Expenses Come Too: R" + Math.Round(populateArray.sumArray()), 2); //Round off to 2 decimal places
             Console.WriteLine("\n" + "*****************************************************************\n\n");
 
-        //Create an int to use as a keyword for a switch
+            //Create an int to use as a keyword for a switch
             int menuOption = 0;
 
-        //Check how much of the user's gross salary is left over after expenses relative to percentage
+            //Check how much of the user's gross salary is left over after expenses relative to percentage
             if (hmln.availAmount >= grossSalary * 0.6 && hmln.availAmount <= grossSalary) { menuOption = 1; }
             if (hmln.availAmount >= grossSalary * 0.33 && hmln.availAmount <= grossSalary * 0.6) { menuOption = 2; }
             if (hmln.availAmount > 0 && hmln.availAmount <= grossSalary * 0.33) { menuOption = 3; }
@@ -933,12 +933,12 @@ namespace PROG6221_POE_Part_1
         }
 
 
-//**************************************************************      Error Message      *****************************************************************************************
+        //**************************************************************      Error Message      *****************************************************************************************
 
         //Create the ErrorMessage Method
         public void ErrorMessgae()
         {
-            
+
             //Print error message for invalid input
             Console.BackgroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("\n*****************************************************************" + "\n" +
@@ -956,10 +956,10 @@ namespace PROG6221_POE_Part_1
         public void SplashScreen()
         {
 
-        //Print Text
+            //Print Text
             Console.WriteLine("Please Be Patient While The Budget Planner App Loads In\n\n");
 
-        //Print Loading
+            //Print Loading
             Console.BackgroundColor = ConsoleColor.DarkYellow;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine("██╗░░░░░░█████╗░░█████╗░██████╗░██╗███╗░░██╗░██████╗░");
@@ -971,18 +971,18 @@ namespace PROG6221_POE_Part_1
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
 
-        //Put the thread to sleep and simulate loading
+            //Put the thread to sleep and simulate loading
             for (int i = 0; i < 27; i++)
             {
 
-            //Progress Bar
+                //Progress Bar
                 Console.BackgroundColor = ConsoleColor.Green;
-                Console.Write("▒▒");              
+                Console.Write("▒▒");
                 Thread.Sleep(100);
 
             }
 
-        //Reset the console colour scheme
+            //Reset the console colour scheme
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
 
