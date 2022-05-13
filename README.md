@@ -28,9 +28,9 @@ Using this information, the app will produce the following:
 Software specs
 *****************
 
-1.) Visual Studio 2022 Version 17.1.0
-2.) Sublime Text Stable Channel, Build 4126
-3.) Github Version 3.5.0
+-1.) Visual Studio 2022 Version 17.1.0
+-2.) Sublime Text Stable Channel, Build 4126
+-3.) Github Version 3.5.0
 
 *****************
 F.A.Q
