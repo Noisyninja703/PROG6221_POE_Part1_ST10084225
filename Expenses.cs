@@ -16,6 +16,7 @@ namespace PROG6221_POE_Part_1
 
         //Create the abstract method CalculateExpense
         public abstract void CalculateExpense(double salary, double expenses, double taxAmount, double accommodation);
+      
 
     }
 }
@@ -75,3 +76,5 @@ namespace PROG6221_POE_Part_1
 //███████████▓▒──────────░░───────────────
 //█████████████▒─────────░░───────────────
 //█████████████▓▒░────────────────────────
+
+

@@ -15,7 +15,7 @@ namespace PROG6221_POE_Part_1
         public override void CalculateExpense(double salary, double expenses, double taxAmount, double accommodation)
         {
 
-            availAmount = Math.Round(salary - (taxAmount + expenses + accommodation), 2); //Round off to 2 decimal places
+            availAmount = salary - (taxAmount + expenses + accommodation);
 
         }
     }

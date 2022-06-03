@@ -5,6 +5,79 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+/*
+ **************************
+ Index Of Changes In Part 2
+ **************************
+ 
+Please Use These KeySearch Comments With the Ctrl + f search function to make it easier to find the changes i've made to part 1 of my poe.
+
+KeySearch Delegate Creation
+
+KeySearch 75% Delegate Instantiation
+
+KeySearch 75% Delegate Invocation
+
+KeySerach 75% Notification
+
+KeySearch Car Payment Selection
+
+KeySearch Car Payment
+
+KeySearch Car Information User Input
+
+KeySearch Dictionary Initialization
+
+HeySearch Desc Print
+ 
+*************************************
+Changes Implemented Based On Feedback
+*************************************
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Generic Collection 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- I have opted to use a dictionary to store the expense names and costs instead of an array list.
+- This will allow me to print the expenses and their names in descending order.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Streamlined Method calls 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- based on code reuseability, i opted to have the majority of my methods return to the main, this way i can simply reuse blocks of code for part 3 of the POE. 
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Exception handling - My thoughts
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- My internal error handling is already effective and efficeint, wrapping my method calls in exception handling statements would only increase processor and ram usage.
+
+- It's not needed for security purposes, due to the levels of abstraction i've added to the program.
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+House Keeping
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- Cleaned up my code.
+
+- Added a Index of changes so you can easily find the changes i've made for part 2.
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Read Me File
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- Updated the ReadMe file 
+
+- Added system requirements
+
+- Ran diagnostic to calibrate system requirements in a virtual machine
+
+- Added system specs
+ */
+
+
 namespace PROG6221_POE_Part_1
 {
     public class Program
@@ -12,15 +85,19 @@ namespace PROG6221_POE_Part_1
 
         //**************************************************************      Variables And Objects      *****************************************************************************************
 
-        PopulateArrayLists populateArray = new PopulateArrayLists();
+        PopulateDictionary populateDict = new PopulateDictionary();
         HomeLoanExpense hmln = new HomeLoanExpense();
         RentalExpense rental = new RentalExpense();
+        CarLoanExpense car = new CarLoanExpense();
 
         public double grossSalary;
         public double thirdOfGrossSalary;
         public double taxAmount;
         public double rentalAmount;
         public double totalExpense;
+
+        //KeySearch Delegate Creation
+        public delegate void notifyUser(double rentalExpense, double hmlnExpense);
 
         //**************************************************************      Main      *****************************************************************************************
 
@@ -45,6 +122,8 @@ namespace PROG6221_POE_Part_1
         //Initialize the display method
         public void DisplayMenu()
         {
+            //Clear the Console
+            Console.Clear();
 
             //Print the menu
 
@@ -199,9 +278,8 @@ namespace PROG6221_POE_Part_1
 
             }
 
-            //Populate the arraylist
-            populateArray.arrayExpenseName.Add("Groceries");
-            populateArray.arrayExpenseCost.Add(groceriesAmount);
+            //Populate the dictionary 
+            populateDict.dictExpenses.Add("Groceries", groceriesAmount);
 
             //Success notification
             Console.ForegroundColor = ConsoleColor.Black;
@@ -229,9 +307,8 @@ namespace PROG6221_POE_Part_1
 
             }
 
-            //Populate the arraylist
-            populateArray.arrayExpenseName.Add("Water And Lights");
-            populateArray.arrayExpenseCost.Add(waterAndLights);
+            //Populate the dictionary 
+            populateDict.dictExpenses.Add("Water and Lights", waterAndLights);
 
             //Success notification
             Console.ForegroundColor = ConsoleColor.Black;
@@ -259,9 +336,8 @@ namespace PROG6221_POE_Part_1
 
             }
 
-            //Populate the arraylist
-            populateArray.arrayExpenseName.Add("Travel Costs");
-            populateArray.arrayExpenseCost.Add(travelCost);
+            //Populate the dictionary 
+            populateDict.dictExpenses.Add("Travel Cost", travelCost);
 
             //Success notification
             Console.ForegroundColor = ConsoleColor.Black;
@@ -288,9 +364,8 @@ namespace PROG6221_POE_Part_1
 
             }
 
-            //Populate the arraylist
-            populateArray.arrayExpenseName.Add("Phone Bills");
-            populateArray.arrayExpenseCost.Add(phoneBill);
+            //Populate the dictionary 
+            populateDict.dictExpenses.Add("Phone Bills", phoneBill);
 
             //Success notification
             Console.ForegroundColor = ConsoleColor.Black;
@@ -379,7 +454,7 @@ namespace PROG6221_POE_Part_1
                               "What Is The Name Of Your Expense >> ");
 
             //Get the name from the user
-            string addExpense = Console.ReadLine();
+            string addExpenseName = Console.ReadLine();
 
             //Create a boolean for input validation
             bool bInvalid = true;
@@ -389,7 +464,7 @@ namespace PROG6221_POE_Part_1
             {
 
                 //If, the input is invalid, get new input
-                if (string.IsNullOrEmpty(addExpense))
+                if (string.IsNullOrEmpty(addExpenseName))
                 {
 
                     //Error message -- Invalid input
@@ -399,7 +474,7 @@ namespace PROG6221_POE_Part_1
 
                     Console.Write("What Is The Name Of Your Expense >> ");
 
-                    addExpense = Console.ReadLine();
+                    addExpenseName = Console.ReadLine();
                 }
 
                 //Else the selection is valid
@@ -412,13 +487,10 @@ namespace PROG6221_POE_Part_1
 
             //If, the input was valid, populate the arraylist and get the expense value from the user
             if (!bInvalid)
-            {
-
-                //Populate the arraylist
-                populateArray.arrayExpenseName.Add(addExpense);
+            {     
 
                 //Prompt the user for the cost of their expense
-                Console.Write("Enter Your Estimated Expense For " + addExpense + " >> R");
+                Console.Write("Enter Your Estimated Expense For " + addExpenseName + " >> R");
 
                 //Initialize the addExpenseAmount variable
                 double addExpenseAmount = 0;
@@ -430,19 +502,19 @@ namespace PROG6221_POE_Part_1
                     //Error message -- Invalid input
                     ErrorMessgae();
 
-                    Console.WriteLine("Please Enter A Valid Numerical Value For " + addExpense + "\n");
+                    Console.WriteLine("Please Enter A Valid Numerical Value For " + addExpenseName + "\n");
 
-                    Console.Write("Enter Your Estimated Expense For " + addExpense + " Again >> R");
+                    Console.Write("Enter Your Estimated Expense For " + addExpenseName + " Again >> R");
 
                 }
 
-                //Populate the arraylist
-                populateArray.arrayExpenseCost.Add(addExpenseAmount);
+                //Populate the dictionary 
+                populateDict.dictExpenses.Add(addExpenseName, addExpenseAmount);
 
                 //Success notification
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.BackgroundColor = ConsoleColor.Green;
-                Console.WriteLine("Expense For " + addExpense + " Saved Successfully!!!");
+                Console.WriteLine("Expense For " + addExpenseName + " Saved Successfully!!!");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.Black;
 
@@ -679,13 +751,12 @@ namespace PROG6221_POE_Part_1
                             //Call the CalcMonthlyBond method from the HomeLoanExpense class
                             hmln.CalcMonthlyBond();
 
-                            //Populate the arraylist
-                            populateArray.arrayExpenseName.Add("Home Loan Monthly Repayments");
-                            populateArray.arrayExpenseCost.Add(hmln.monthlyAmount);
+                            //Populate the dictionary 
+                            populateDict.dictExpenses.Add("Home Loan Monthly Repayments", hmln.monthlyAmount);
 
-                            //Call the CalculateExpense method from the PopulateArrayLists class, using the parameters passed to it
-                            hmln.CalculateExpense(grossSalary, populateArray.sumArray(), taxAmount, hmln.monthlyAmount);
-                            BudgetReport();
+                            //Call the CalculateExpense method from the PopulateDictionary class, using the parameters passed to it
+                            hmln.CalculateExpense(grossSalary, populateDict.sumDict(), taxAmount, hmln.monthlyAmount);
+                            CarPaymentSelection();
                             break;
 
                         //Repay months = 360
@@ -705,13 +776,12 @@ namespace PROG6221_POE_Part_1
                             //Call the CalcMonthlyBond method from the HomeLoanExpense class
                             hmln.CalcMonthlyBond();
 
-                            //Populate the arraylist
-                            populateArray.arrayExpenseName.Add("Home Loan Monthly Repayments");
-                            populateArray.arrayExpenseCost.Add(hmln.monthlyAmount);
+                            //Populate the dictionary 
+                            populateDict.dictExpenses.Add("Home Loan Monthly Repayments", hmln.monthlyAmount);
 
-                            //Call the CalculateExpense method from the PopulateArrayLists class, using the parameters passed to it
-                            hmln.CalculateExpense(grossSalary, populateArray.sumArray(), taxAmount, hmln.monthlyAmount);
-                            BudgetReport();
+                            //Call the CalculateExpense method from the PopulateDictionary class, using the parameters passed to it
+                            hmln.CalculateExpense(grossSalary, populateDict.sumDict(), taxAmount, hmln.monthlyAmount);
+                            CarPaymentSelection();
                             break;
 
                     }
@@ -752,21 +822,166 @@ namespace PROG6221_POE_Part_1
             Console.BackgroundColor = ConsoleColor.Black;
 
             //Call the CalculateExpense method from the RentalExpense class, using the passed parameters
-            rental.CalculateExpense(grossSalary, populateArray.sumArray(), taxAmount, rentalAmount);
+            rental.CalculateExpense(grossSalary, populateDict.sumDict(), taxAmount, rentalAmount);
 
-            //Populate the arraylist
-            populateArray.arrayExpenseName.Add("Accommodation Monthly Rental Fee");
-            populateArray.arrayExpenseCost.Add(rentalAmount);
+            //Populate the dictionary         
+            populateDict.dictExpenses.Add("Rental", rentalAmount);
 
             //Call the BudgetReport method
-            BudgetReport();
+            CarPaymentSelection();
         }
+
+        //**************************************************************      Car Payment Selection      *****************************************************************************************
+        //KeySearch Car Payment Selection
+
+        public void CarPaymentSelection()
+        {
+
+            string menuOption;
+
+            Console.WriteLine("\n*****************************************************************\n\n" +
+                              "Do You Wish To Buy A Car?\n" +
+                              "Enter '1' If You Wish To Buy A Car\n" +
+                              "Or Enter '2' If You Don't Wish To Buy A Car\n" +
+                              "Your Selection >> ");
+
+            menuOption = Console.ReadLine();
+
+            switch (menuOption)
+            {
+
+                case "1": CarPayment(); break;
+
+                case "2": BudgetReport(); break;
+
+            }
+
+        }
+
+        //**************************************************************      Car Payment     *****************************************************************************************
+        //KeySearch Car Payment
+
+        public void CarPayment()
+        {
+
+            //KeySearch Car Information User Input
+            string carModelAndMake = "";
+            Console.Write("\n*****************************************************************\n\n" +
+                         "Please Enter The Make And Model Of The Car >> ");
+            carModelAndMake = Console.ReadLine();
+            car.ModelAndMake = carModelAndMake;
+
+            Console.Write("\n*****************************************************************\n\n" +
+                         "Please Enter The Purchase Price Of The Car >> R");
+
+            //Initialize the carPurchasePrice variable
+            double carPurchasePrice = 0;
+
+            //While, the given input is not a valid double, get new input from the user
+            while (!double.TryParse(Console.ReadLine(), out carPurchasePrice))
+            {
+
+                //Error message -- Invalid input
+                ErrorMessgae();
+
+                Console.WriteLine("Please Enter A Valid Numerical Value For The Purchase Price\n");
+                Console.Write("Please Enter The Purchase Price Of The Car Again >> R");
+
+            }
+
+            //Assign the value to the carPurchasePrice variable in the HomeLoanExpense class 
+            car.CarPurchasePrice = carPurchasePrice;
+
+            //Success notification
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.WriteLine("Car Purchase Price Saved Successfully!!!");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+
+
+            //Prompt the user for the total deposit
+            Console.Write("\n*****************************************************************\n\n" +
+                          "Please Enter The Total Deposit >> R");
+            double carTotalDeposit = 0;
+
+            //While, the given input is not a valid double, get new input from the user
+            while (!double.TryParse(Console.ReadLine(), out carTotalDeposit))
+            {
+
+                //Error message -- Invalid input
+                ErrorMessgae();
+
+                Console.WriteLine("Please Enter A Valid Numerical Value For The Total Deposit\n");
+                Console.Write("Please Enter The Total Deposit Again >> R");
+
+            }
+
+            //Assign the value to the TotalDeposit variable in the HomeLoanExpense class 
+            car.CarTotalDeposit = carTotalDeposit;
+
+            //Success notification
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.WriteLine("Car Total Deposit Saved Successfully!!!");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+
+
+            //Prompt the user for the annual interest rate
+            Console.Write("\n*****************************************************************\n\n" +
+                          "Please Enter Interest Rate In Percentage Format(%) >> ");
+
+            //Initialize the InterestRate Variable
+            double carInterestRate = 0;
+
+            //While the input is not a valid double, get new input
+            while (!double.TryParse(Console.ReadLine(), out carInterestRate) || carInterestRate < 0)
+            {
+
+                //Error message -- Invalid input
+                ErrorMessgae();
+
+                Console.WriteLine("Please Enter A Valid Numerical Value For The Interest Rate\n");
+                Console.Write("Please Enter Interest Rate In Percentage Format(%) Again >> ");
+
+            }
+
+            //Assign the value to the InterestRate variable in the HomeLoanExpense class 
+            car.CarInterestRate = carInterestRate;
+
+            //Success notification
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.WriteLine("Car Interest Rate Saved Successfully!!!");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+
+            //Call the CalcMonthlyBond method from the HomeLoanExpense class
+            car.CalcMonthlyPayment();
+
+            //Populate the dictionary         
+            populateDict.dictExpenses.Add(car.ModelAndMake + " Monthly Payments", car.monthlyCost);
+
+            //Call the CalculateExpense method from the PopulateDictionary class, using the parameters passed to it
+            car.CarCalcExpense(grossSalary, populateDict.sumDict(), taxAmount, hmln.monthlyAmount, car.monthlyCost);
+            BudgetReport();
+
+
+
+
+        }
+
+
 
         //**************************************************************      Budget Report      *****************************************************************************************
 
         //Create the budget report method
         public void BudgetReport()
         {
+
+            double rentalExpense = Math.Round((rental.availAmount - car.monthlyCost), 2);
+            double hmlnExpense = Math.Round((hmln.availAmount - car.monthlyCost), 2);
 
             //Print the gross salary before and after taxes
             Console.WriteLine("\n*****************************************************************\n\n");
@@ -775,41 +990,58 @@ namespace PROG6221_POE_Part_1
             Console.WriteLine("\nYour Estimated Taxes Cost R" + taxAmount + "\n");
             Console.WriteLine("\nYour Salary After Taxes Is R" + (grossSalary - taxAmount) + "\n");
             Console.WriteLine("\n" +
-                "*****************************************************************\n\n");
+                "*****************************************************************\n");
             Console.WriteLine("\nYour Monthly Expenses Are As Followes: \n");
 
-            //For loop to print the expenses and their names from the arraylists
-            for (int i = 0; i < populateArray.arrayExpenseName.Count; i++)
+            //Sort the dictionary in descending order based on the "value" amount 
+            populateDict.dictExpenses = populateDict.dictExpenses.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+
+            //KeySearch Desc Print
+            //Print the expenses from the dictionary in descending Order
+            foreach (KeyValuePair<string, double> pair in populateDict.dictExpenses)
             {
-
-                Console.WriteLine(populateArray.arrayExpenseName[i] + ": R" + populateArray.arrayExpenseCost[i] + "\n\n");
-
-
+                Console.WriteLine(pair.Key + ": R" + pair.Value + "\n");
             }
 
+            //Print the total expenses for the month
             Console.WriteLine("*****************************************************************\n");
-            Console.WriteLine("Your Total Expenses Come Too: R" + Math.Round(populateArray.sumArray()), 2); //Round off to 2 decimal places
+            Console.WriteLine("Your Total Expenses Come Too: R" + populateDict.sumDict());
             Console.WriteLine("\n" + "*****************************************************************\n\n");
+
+            //KeySearch 75% Delegate Instantiation
+            notifyUser del_notifyuser = new notifyUser(NotifyUser);
+
+            //KeySearch 75% Delegate Invocation
+            del_notifyuser(rentalExpense, hmlnExpense);
+
+        }
+
+        //**************************************************************      Notify User      *****************************************************************************************
+        //KeySerach 75% Notification
+
+        public void NotifyUser(double rentalExpense, double hmlnExpense)
+        {
+
 
             //Create an int to use as a keyword for a switch
             int menuOption = 0;
 
             //Check how much of the user's gross salary is left over after expenses relative to percentage
-            if (hmln.availAmount >= grossSalary * 0.6 && hmln.availAmount <= grossSalary) { menuOption = 1; }
-            if (hmln.availAmount >= grossSalary * 0.33 && hmln.availAmount <= grossSalary * 0.6) { menuOption = 2; }
-            if (hmln.availAmount > 0 && hmln.availAmount <= grossSalary * 0.33) { menuOption = 3; }
-            if (hmln.availAmount < 0) { menuOption = 4; }
+            if (hmlnExpense >= grossSalary * 0.60 && hmlnExpense <= grossSalary) { menuOption = 1; }
+            if (hmlnExpense >= grossSalary * 0.33 && hmlnExpense <= grossSalary * 0.6) { menuOption = 2; }
+            if (hmlnExpense > 0 && hmlnExpense <= grossSalary * 0.25) { menuOption = 3; }
+            if (hmlnExpense < 0) { menuOption = 4; }
 
 
-            if (rental.availAmount >= grossSalary * 0.6 && rental.availAmount <= grossSalary) { menuOption = 1; }
-            if (rental.availAmount >= grossSalary * 0.33 && rental.availAmount <= grossSalary * 0.6) { menuOption = 2; }
-            if (rental.availAmount > 0 && rental.availAmount <= grossSalary * 0.33) { menuOption = 3; }
-            if (rental.availAmount < 0) { menuOption = 4; }
+            if (rentalExpense >= grossSalary * 0.60 && rentalExpense <= grossSalary) { menuOption = 1; }
+            if (rentalExpense >= grossSalary * 0.33 && rentalExpense <= grossSalary * 0.6) { menuOption = 2; }
+            if (rentalExpense > 0 && rentalExpense <= grossSalary * 0.25) { menuOption = 3; }
+            if (rentalExpense < 0) { menuOption = 4; }
 
             //If, rental was not chosen, apply calc using HomeLoanExpense, Else, Use rentalExpense
             //Else if, Displays the amount available after calculations in different colours based of what percentage of the gross salary is left
-            // Green - More than 60% // Yellow - More than 33% // Dark Yellow - Less than 33% // Dark Red - Less than 0%
-            if (rental.availAmount == 0)
+            // Green - More than 60% // Yellow - More than 33% // Dark Yellow - Less than 25% // Dark Red - Less than 0%
+            if (rentalExpense == 0)
             {
 
                 switch (menuOption)
@@ -820,11 +1052,13 @@ namespace PROG6221_POE_Part_1
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.Green;
                         Console.WriteLine("*****************************************************************\n" +
-                                      "Your Available Monthly Balance Is: R" + hmln.availAmount + "                         " +
+                                      "Your Available Monthly Balance Is: R" + hmlnExpense + "                         " +
                                       "\n*****************************************************************\n\n");
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.BackgroundColor = ConsoleColor.Black;
 
+                        //Prompt to exit or return to main menu
+                        Restart();
                         break;
 
 
@@ -835,24 +1069,30 @@ namespace PROG6221_POE_Part_1
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("*****************************************************************\n" +
-                                      "Your Available Monthly Balance Is: R" + hmln.availAmount + "                         " +
+                                      "Your Available Monthly Balance Is: R" + hmlnExpense + "                         " +
                                       "\n*****************************************************************\n\n");
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.BackgroundColor = ConsoleColor.Black;
 
+                        //Prompt to exit or return to main menu
+                        Restart();
                         break;
 
 
                     case 3:
 
-                        //Surplus amount < 33% of gross salary
+                        //Surplus amount < 25% of gross salary
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("*****************************************************************\n" +
-                                      "Your Available Monthly Balance Is: R" + hmln.availAmount + "                         " +
+                                      "Your Available Monthly Balance Is: R" + hmlnExpense + "                          \n" +
+                                      "You've Used More Than 75% Of Your Salary" + "                        " +
                                       "\n*****************************************************************\n\n");
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.BackgroundColor = ConsoleColor.Black;
+
+                        //Prompt to exit or return to main menu
+                        Restart();
                         break;
 
 
@@ -862,11 +1102,14 @@ namespace PROG6221_POE_Part_1
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("*****************************************************************\n" +
-                                      "Your Available Monthly Balance Is: -R" + (hmln.availAmount * -1) + "                         " +
+                                      "Your Available Monthly Balance Is: -R" + (hmlnExpense * -1) + "                          \n" +
+                                      "You've Used More Than 100% Of Your Salary" + "                        " +
                                       "\n*****************************************************************\n\n");
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.BackgroundColor = ConsoleColor.Black;
 
+                        //Prompt to exit or return to main menu
+                        Restart();
                         break;
                 }
             }
@@ -881,11 +1124,13 @@ namespace PROG6221_POE_Part_1
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.Green;
                         Console.WriteLine("*****************************************************************\n" +
-                                      "Your Available Monthly Balance Is: R" + rental.availAmount + "                         " +
+                                      "Your Available Monthly Balance Is: R" + rentalExpense + "                         " +
                                       "\n*****************************************************************\n\n");
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.BackgroundColor = ConsoleColor.Black;
 
+                        //Prompt to exit or return to main menu
+                        Restart();
                         break;
 
                     case 2:
@@ -894,24 +1139,29 @@ namespace PROG6221_POE_Part_1
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("*****************************************************************\n" +
-                                      "Your Available Monthly Balance Is: R" + rental.availAmount + "                         " +
+                                      "Your Available Monthly Balance Is: R" + rentalExpense + "                         " +
                                       "\n*****************************************************************\n\n");
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.BackgroundColor = ConsoleColor.Black;
 
+                        //Prompt to exit or return to main menu
+                        Restart();
                         break;
 
                     case 3:
 
-                        //Surplus amount < 33% of gross salary
+                        //Surplus amount < 25% of gross salary
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("*****************************************************************\n" +
-                                      "Your Available Monthly Balance Is: R" + rental.availAmount + "                         " +
+                                      "Your Available Monthly Balance Is: R" + rentalExpense + "                          \n" +
+                                      "You've Used More Than 75% Of Your Salary" + "                        " +
                                       "\n*****************************************************************\n\n");
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.BackgroundColor = ConsoleColor.Black;
 
+                        //Prompt to exit or return to main menu
+                        Restart();
                         break;
 
                     case 4:
@@ -920,11 +1170,14 @@ namespace PROG6221_POE_Part_1
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("*****************************************************************\n" +
-                                      "Your Available Monthly Balance Is: -R" + (rental.availAmount * -1) + "                         " +
+                                      "Your Available Monthly Balance Is: -R" + (rentalExpense * -1) + "                          \n" +
+                                      "You've Used More Than 100% Of Your Salary" + "                        " +
                                       "\n*****************************************************************\n\n");
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.BackgroundColor = ConsoleColor.Black;
 
+                        //Prompt to exit or return to main menu
+                        Restart();
                         break;
 
 
@@ -971,6 +1224,11 @@ namespace PROG6221_POE_Part_1
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
 
+
+
+
+
+
             //Put the thread to sleep and simulate loading
             for (int i = 0; i < 27; i++)
             {
@@ -986,11 +1244,74 @@ namespace PROG6221_POE_Part_1
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
 
-            //Clear the console
-            Console.Clear();
-
         }
 
+        //**************************************************************      Restart Application      *****************************************************************************************
+
+        public void Restart()
+        {
+
+        //Exit or Reutrn to Main menu
+
+            Console.Write("\n*****************************************************************" + "\n" +
+                          "Do You Want To Return To The Main Menu?" + "\n" +
+                          "Press 1 To Return To The Main Menu?" + "\n " +
+                          "Press 2 To Exit.\n" +
+                          "Your Selection >> ");
+
+            //Create a boolean for selection validation
+            bool bInvalid = true;
+
+            //Create a string for menu selection 
+            string menuOption = Console.ReadLine();
+
+            //While bInvalid is true, validate the selection then execute the switch
+            while (bInvalid)
+            {
+
+                //If the input is empty or not one of the given options, get new input
+                if (string.IsNullOrEmpty(menuOption) || !(menuOption.Equals("1") || menuOption.Equals("2")))
+                {
+
+                    bInvalid = true;
+
+                    //Error message -- Invalid input
+                    ErrorMessgae();
+
+                    Console.Write("\n*****************************************************************" + "\n" +
+                        "Do You Want To Return To The Main Menu?" + "\n" +
+                        "Press 1 To Return To The Main Menu?" + "\n " +
+                        "Press 2 To Exit.\n" +
+                        "Your Selection >> ");
+
+                    menuOption = Console.ReadLine();
+                }
+
+                //Else, selection is valid
+                else
+                {
+                    bInvalid = false;
+
+                }
+
+                //If, the selection is valid execute the switch
+                if (!bInvalid)
+                {
+
+                    //Switch
+                    switch (menuOption)
+                    {
+
+                        //Exit the application
+                        case "1": populateDict.dictExpenses.Clear(); DisplayMenu(); break;
+
+                        //Go back to the main menu
+                        case "2": System.Environment.Exit(0); ; break;
+                    }
+
+                }
+            }
+        }
         //**************************************************************      Exit Application      *****************************************************************************************
 
         //Create the ExitApplication method

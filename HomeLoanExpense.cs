@@ -33,19 +33,19 @@ namespace PROG6221_POE_Part_1
 
         //Create the CalcMonthlyBond method
         public double CalcMonthlyBond()
-        {
+        {    
 
             //Calculate the monthly payment amount
-
+     
             monthlyAmount = Math.Round(((homePurchasePrice - homeTotalDeposit) * (1 + (annualInterestRate / 100) * (RepayMonths / 12)) / 12), 2); //All calculations are done during the runtime, this helps reduce the need to assign memory to more variables
 
-            //Print the monthly payment amount
-            Console.WriteLine("\n*****************************************************************\n\n" +
+        //Print the monthly payment amount
+            Console.WriteLine("\n*****************************************************************\n\n" + 
                               "Your Monthly Home Loan Repayment is: R" + monthlyAmount + "\n");
 
-            //If, the monthly payment is greater than a third of the user's gross salary, give them a warning
+        //If, the monthly payment is greater than a third of the user's gross salary, give them a warning
             if (monthlyAmount > (thirdOfGrossSalary))
-            {
+            {               
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Approval Of The Home Loan Is Unlikely");
@@ -72,8 +72,8 @@ namespace PROG6221_POE_Part_1
         public override void CalculateExpense(double salary, double expenses, double taxAmount, double accommodation)
         {
 
-            availAmount = Math.Round(salary - (taxAmount + expenses + accommodation), 2); //Round off too 2 decimal places
-
+            availAmount = salary - (taxAmount + expenses + accommodation);
+          
         }
 
     }
@@ -135,7 +135,6 @@ namespace PROG6221_POE_Part_1
 //███████████▓▒──────────░░───────────────
 //█████████████▒─────────░░───────────────
 //█████████████▓▒░────────────────────────
-
 
 
 
