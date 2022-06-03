@@ -28,7 +28,9 @@ KeySearch Car Information User Input
 
 KeySearch Dictionary Initialization
 
-HeySearch Desc Print
+KeySearch Desc Print
+
+KeySearch Restart
  
 *************************************
 Changes Implemented Based On Feedback
@@ -63,6 +65,8 @@ House Keeping
 
 - Added a Index of changes so you can easily find the changes i've made for part 2.
 
+- Added a return to main menu feature.
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -75,6 +79,17 @@ Read Me File
 - Ran diagnostic to calibrate system requirements in a virtual machine
 
 - Added system specs
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Change Log
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- Created a change log
+- Updated change log on part 1 changes
+- Updated change log on part 2 changes
+
+
  */
 
 
@@ -83,7 +98,7 @@ namespace PROG6221_POE_Part_1
     public class Program
     {
 
-        //**************************************************************      Variables And Objects      *****************************************************************************************
+        //**************************************************************     Objects, Variables And Delegates       *****************************************************************************************
 
         PopulateDictionary populateDict = new PopulateDictionary();
         HomeLoanExpense hmln = new HomeLoanExpense();
@@ -487,7 +502,7 @@ namespace PROG6221_POE_Part_1
 
             //If, the input was valid, populate the arraylist and get the expense value from the user
             if (!bInvalid)
-            {     
+            {
 
                 //Prompt the user for the cost of their expense
                 Console.Write("Enter Your Estimated Expense For " + addExpenseName + " >> R");
@@ -1247,11 +1262,12 @@ namespace PROG6221_POE_Part_1
         }
 
         //**************************************************************      Restart Application      *****************************************************************************************
+        //KeySearch Restart
 
         public void Restart()
         {
 
-        //Exit or Reutrn to Main menu
+            //Exit or Reutrn to Main menu
 
             Console.Write("\n*****************************************************************" + "\n" +
                           "Do You Want To Return To The Main Menu?" + "\n" +
