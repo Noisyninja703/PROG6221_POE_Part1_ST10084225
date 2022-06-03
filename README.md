@@ -1,6 +1,8 @@
 **ST10084225_PROG6221_POE_Part_2**
 
+***********************
 **Note: The PDF version of this ReadME is far superior, You can find it in this branch of the repository**
+***********************
 
 **************************
 Introduction
@@ -101,16 +103,22 @@ System Requirements
 Developer Info
 **************************
 Name: Sivan Moodley
+
 Student number: ST10084225
+
 Cell phone number: 0815750712
+
 Email: sivan.moodley02@gmail.com
 
 **************************
 System Used For Testing
 **************************
 CPU: AMD Ryzen 7 3700X
+
 GPU: NVIDIA GeForce RTX 2060 Super
+
 RAM: 16GB 2666Mhz DDR4
+
 Storage: 500GB Nvme m.2 SSD
 
 **************************
@@ -141,10 +149,12 @@ Code Attribution
 
 7.) C# Exception Handling Best Practices: https://stackify.com/csharp-exception-handling-best-practices/#:~:text=The%20C%23%20try%20and%20catch,error%2C%20or%20crash%20the%20application. (Accessed: 06/01/2022)
 
-
+************
 GitHub
-1.) Repository: https://github.com/Noisyninja703/PROG6221_POE_Part1_ST10084225.git
-2.) Kanban: https://github.com/Noisyninja703/PROG6221_POE_Part1_ST10084225/projects/2
+************
+1.) Repository: https://github.com/Noisyninja703/PROG6221_POE_Part1_ST10084225/tree/PROG6211_POE_Part_2
+
+2.) Kanban: https://github.com/Noisyninja703/PROG6221_POE_Part1_ST10084225/projects/3
 
 NOTE: There is a second branch named PROG6221_POE_Part_2
 This is where the files for my part 2 are stored.
