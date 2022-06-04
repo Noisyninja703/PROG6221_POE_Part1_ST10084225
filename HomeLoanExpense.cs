@@ -37,7 +37,7 @@ namespace PROG6221_POE_Part_1
 
             //Calculate the monthly payment amount
      
-            monthlyAmount = Math.Round(((homePurchasePrice - homeTotalDeposit) * (1 + (annualInterestRate / 100) * (RepayMonths / 12)) / 12), 2); //All calculations are done during the runtime, this helps reduce the need to assign memory to more variables
+            monthlyAmount = Math.Round((homePurchasePrice - homeTotalDeposit) * (1 + (annualInterestRate / 100) * (RepayMonths / 12)) / 12, 2); //All calculations are done during the runtime, this helps reduce the need to assign memory to more variables
 
         //Print the monthly payment amount
             Console.WriteLine("\n*****************************************************************\n\n" + 

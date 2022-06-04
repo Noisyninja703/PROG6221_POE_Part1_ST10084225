@@ -39,6 +39,7 @@ Changes Implemented Based On Feedback
 Generic Collection 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 - I have opted to use a dictionary to store the expense names and costs instead of an array list.
+
 - This will allow me to print the expenses and their names in descending order.
 
 
@@ -47,7 +48,7 @@ Streamlined Method calls
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 - based on code reuseability, i opted to have the majority of my methods return to the main, this way i can simply reuse blocks of code for part 3 of the POE. 
 
-
+- Streamlined abstract methods
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Exception handling - My thoughts
@@ -110,9 +111,10 @@ namespace PROG6221_POE_Part_1
         public double taxAmount;
         public double rentalAmount;
         public double totalExpense;
+        public bool carSelected;
 
         //KeySearch Delegate Creation
-        public delegate void notifyUser(double rentalExpense, double hmlnExpense);
+        public delegate void notifyUser(double rentalExpense, double hmlnExpense, double carExpense);
 
         //**************************************************************      Main      *****************************************************************************************
 
@@ -137,6 +139,8 @@ namespace PROG6221_POE_Part_1
         //Initialize the display method
         public void DisplayMenu()
         {
+            carSelected = false;
+
             //Clear the Console
             Console.Clear();
 
@@ -791,11 +795,13 @@ namespace PROG6221_POE_Part_1
                             //Call the CalcMonthlyBond method from the HomeLoanExpense class
                             hmln.CalcMonthlyBond();
 
+                            //Call the CalculateExpense method from the PopulateDictionary class, using the parameters passed to it
+                            hmln.CalculateExpense(grossSalary, populateDict.sumDict(), taxAmount, hmln.monthlyAmount);
+
                             //Populate the dictionary 
                             populateDict.dictExpenses.Add("Home Loan Monthly Repayments", hmln.monthlyAmount);
 
-                            //Call the CalculateExpense method from the PopulateDictionary class, using the parameters passed to it
-                            hmln.CalculateExpense(grossSalary, populateDict.sumDict(), taxAmount, hmln.monthlyAmount);
+                            //Call the CarPaymentSelection method
                             CarPaymentSelection();
                             break;
 
@@ -904,7 +910,7 @@ namespace PROG6221_POE_Part_1
 
             }
 
-            //Assign the value to the carPurchasePrice variable in the HomeLoanExpense class 
+            //Assign the value to the carPurchasePrice variable in the CarLoanExpenses class 
             car.CarPurchasePrice = carPurchasePrice;
 
             //Success notification
@@ -932,7 +938,7 @@ namespace PROG6221_POE_Part_1
 
             }
 
-            //Assign the value to the TotalDeposit variable in the HomeLoanExpense class 
+            //Assign the value to the TotalDeposit variable in the CarLoanExpenses class 
             car.CarTotalDeposit = carTotalDeposit;
 
             //Success notification
@@ -962,7 +968,7 @@ namespace PROG6221_POE_Part_1
 
             }
 
-            //Assign the value to the InterestRate variable in the HomeLoanExpense class 
+            //Assign the value to the InterestRate variable in the CarLoanExpenses class 
             car.CarInterestRate = carInterestRate;
 
             //Success notification
@@ -972,18 +978,31 @@ namespace PROG6221_POE_Part_1
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
 
-            //Call the CalcMonthlyBond method from the HomeLoanExpense class
+            //Call the CalcMonthlyPayment method from the CarLoanExpenses class
             car.CalcMonthlyPayment();
 
             //Populate the dictionary         
             populateDict.dictExpenses.Add(car.ModelAndMake + " Monthly Payments", car.monthlyCost);
 
-            //Call the CalculateExpense method from the PopulateDictionary class, using the parameters passed to it
-            car.CarCalcExpense(grossSalary, populateDict.sumDict(), taxAmount, hmln.monthlyAmount, car.monthlyCost);
-            BudgetReport();
+            carSelected = true;
 
+            //Calc the car expense based on whether the user is renting or buying property
+            if (hmln.monthlyAmount != 0)
+            {
+                //Call the CalculateExpense method from the CarLoanExpenses class, using the parameters passed to it
+                car.CarCalcExpense(hmln.availAmount, car.monthlyCost);
+                BudgetReport();
+            }
 
+            else
 
+            {
+
+                //Call the CalculateExpense method from the CarLoanExpenses class, using the parameters passed to it
+                car.CarCalcExpense(rental.availAmount, car.monthlyCost);
+                BudgetReport();
+
+            }
 
         }
 
@@ -995,8 +1014,10 @@ namespace PROG6221_POE_Part_1
         public void BudgetReport()
         {
 
-            double rentalExpense = Math.Round((rental.availAmount - car.monthlyCost), 2);
-            double hmlnExpense = Math.Round((hmln.availAmount - car.monthlyCost), 2);
+            double rentalExpense = Math.Round(rental.availAmount, 2);
+            double hmlnExpense = Math.Round(hmln.availAmount, 2);
+            double carExpense = Math.Round(car.carAvailAmount, 2);
+            //hmln.availAmount - car.monthlyCost
 
             //Print the gross salary before and after taxes
             Console.WriteLine("\n*****************************************************************\n\n");
@@ -1027,14 +1048,14 @@ namespace PROG6221_POE_Part_1
             notifyUser del_notifyuser = new notifyUser(NotifyUser);
 
             //KeySearch 75% Delegate Invocation
-            del_notifyuser(rentalExpense, hmlnExpense);
+            del_notifyuser(rentalExpense, hmlnExpense, carExpense);
 
         }
 
         //**************************************************************      Notify User      *****************************************************************************************
         //KeySerach 75% Notification
 
-        public void NotifyUser(double rentalExpense, double hmlnExpense)
+        public void NotifyUser(double rentalExpense, double hmlnExpense, double carExpense)
         {
 
 
@@ -1042,23 +1063,39 @@ namespace PROG6221_POE_Part_1
             int menuOption = 0;
 
             //Check how much of the user's gross salary is left over after expenses relative to percentage
-            if (hmlnExpense >= grossSalary * 0.60 && hmlnExpense <= grossSalary) { menuOption = 1; }
-            if (hmlnExpense >= grossSalary * 0.33 && hmlnExpense <= grossSalary * 0.6) { menuOption = 2; }
-            if (hmlnExpense > 0 && hmlnExpense <= grossSalary * 0.25) { menuOption = 3; }
-            if (hmlnExpense < 0) { menuOption = 4; }
 
 
-            if (rentalExpense >= grossSalary * 0.60 && rentalExpense <= grossSalary) { menuOption = 1; }
-            if (rentalExpense >= grossSalary * 0.33 && rentalExpense <= grossSalary * 0.6) { menuOption = 2; }
-            if (rentalExpense > 0 && rentalExpense <= grossSalary * 0.25) { menuOption = 3; }
-            if (rentalExpense < 0) { menuOption = 4; }
+                if (!carSelected && hmlnExpense >= grossSalary * 0.60 && hmlnExpense <= grossSalary) { menuOption = 1; }
+           
+                if (!carSelected && hmlnExpense >= grossSalary * 0.33 && hmlnExpense <= grossSalary * 0.6) { menuOption = 2; }
+          
+                if (!carSelected && hmlnExpense > 0 && hmlnExpense <= grossSalary * 0.25) { menuOption = 3; }
+           
+                if (!carSelected && hmlnExpense < 0) { menuOption = 4; }
+            
+
+
+                if (!carSelected && rentalExpense >= grossSalary * 0.60 && rentalExpense <= grossSalary) { menuOption = 5; }
+            
+                if (!carSelected && rentalExpense >= grossSalary * 0.33 && rentalExpense <= grossSalary * 0.6) { menuOption = 6; }
+            
+                if (!carSelected && rentalExpense > 0 && rentalExpense <= grossSalary * 0.25) { menuOption = 7; }
+            
+                if (!carSelected && rentalExpense < 0) { menuOption = 8; }
+            
+
+                if (carSelected && (carExpense >= grossSalary * 0.60 && carExpense <= grossSalary)) { menuOption = 9; }
+            
+                if (carSelected && (carExpense >= grossSalary * 0.33 && carExpense <= grossSalary * 0.6)) { menuOption = 10; }
+            
+                if (carSelected && (carExpense > 0 && carExpense <= grossSalary * 0.25)) { menuOption = 11; }
+            
+                if (carSelected && (carExpense < 0)) { menuOption = 12; }
+         
 
             //If, rental was not chosen, apply calc using HomeLoanExpense, Else, Use rentalExpense
             //Else if, Displays the amount available after calculations in different colours based of what percentage of the gross salary is left
             // Green - More than 60% // Yellow - More than 33% // Dark Yellow - Less than 25% // Dark Red - Less than 0%
-            if (rentalExpense == 0)
-            {
-
                 switch (menuOption)
                 {
                     case 1:
@@ -1126,14 +1163,8 @@ namespace PROG6221_POE_Part_1
                         //Prompt to exit or return to main menu
                         Restart();
                         break;
-                }
-            }
-
-            else
-            {
-                switch (menuOption)
-                {
-                    case 1:
+    
+                    case 5:
 
                         //Surplus amount > 60% of gross salary
                         Console.ForegroundColor = ConsoleColor.Black;
@@ -1148,7 +1179,7 @@ namespace PROG6221_POE_Part_1
                         Restart();
                         break;
 
-                    case 2:
+                    case 6:
 
                         //Surplus amount > 33% of gross salary
                         Console.ForegroundColor = ConsoleColor.Black;
@@ -1163,7 +1194,7 @@ namespace PROG6221_POE_Part_1
                         Restart();
                         break;
 
-                    case 3:
+                    case 7:
 
                         //Surplus amount < 25% of gross salary
                         Console.ForegroundColor = ConsoleColor.Black;
@@ -1179,7 +1210,7 @@ namespace PROG6221_POE_Part_1
                         Restart();
                         break;
 
-                    case 4:
+                    case 8:
 
                         //Surplus amount < 0% of gross salary
                         Console.ForegroundColor = ConsoleColor.Black;
@@ -1194,11 +1225,74 @@ namespace PROG6221_POE_Part_1
                         //Prompt to exit or return to main menu
                         Restart();
                         break;
+   
+                    case 9:
+
+                        //Surplus amount > 60% of gross salary
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.WriteLine("*****************************************************************\n" +
+                                      "Your Available Monthly Balance Is: R" + carExpense + "                         " +
+                                      "\n*****************************************************************\n\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.Black;
+
+                        //Prompt to exit or return to main menu
+                        Restart();
+                        break;
+
+                    case 10:
+
+                        //Surplus amount > 33% of gross salary
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("*****************************************************************\n" +
+                                      "Your Available Monthly Balance Is: R" + carExpense + "                         " +
+                                      "\n*****************************************************************\n\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.Black;
+
+                        //Prompt to exit or return to main menu
+                        Restart();
+                        break;
+
+                    case 11:
+
+                        //Surplus amount < 25% of gross salary
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("*****************************************************************\n" +
+                                      "Your Available Monthly Balance Is: R" + carExpense + "                          \n" +
+                                      "You've Used More Than 75% Of Your Salary" + "                        " +
+                                      "\n*****************************************************************\n\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.Black;
+
+                        //Prompt to exit or return to main menu
+                        Restart();
+                        break;
+
+                    case 12:
+
+                        //Surplus amount < 0% of gross salary
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("*****************************************************************\n" +
+                                      "Your Available Monthly Balance Is: -R" + (carExpense * -1) + "                          \n" +
+                                      "You've Used More Than 100% Of Your Salary" + "                        " +
+                                      "\n*****************************************************************\n\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.Black;
+
+                        //Prompt to exit or return to main menu
+                        Restart();
+                        break;
 
 
                 }
+
             }
-        }
+        
 
 
         //**************************************************************      Error Message      *****************************************************************************************
@@ -1318,10 +1412,10 @@ namespace PROG6221_POE_Part_1
                     switch (menuOption)
                     {
 
-                        //Exit the application
-                        case "1": populateDict.dictExpenses.Clear(); DisplayMenu(); break;
+                        //Goto main menu and reset the values used for calculations
+                        case "1": populateDict.dictExpenses.Clear(); hmln.availAmount = 0; rental.availAmount = 0; car.carAvailAmount = 0; hmln.monthlyAmount = 0; rentalAmount = 0; carSelected = false; DisplayMenu(); break;
 
-                        //Go back to the main menu
+                        //Exit
                         case "2": System.Environment.Exit(0); ; break;
                     }
 
