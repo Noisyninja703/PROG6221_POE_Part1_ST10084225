@@ -1,0 +1,249 @@
+﻿<Page x:Class="PROG6221_POE_Draft2.HomeExpensesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PROG6221_POE_Draft2"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1080"
+      Title="HomeExpensesPage"
+      Background="Transparent">
+
+    <StackPanel>
+
+        <!--Grid And Definitions-->
+        <Grid Height="720">
+
+            <!--Rental Stack Panel-->
+            <StackPanel x:Name="rentPanel"  Grid.Column="0" Visibility="Hidden" >
+                <Grid>
+
+                    <!--TextBlocks-->
+                    <TextBlock Grid.Column="0"
+                  Grid.Row="0"
+                   Text="Monthly Rental"
+                       FontSize="22"
+                       Foreground="White"
+                       Padding="10, 10, 10, 10"/>
+                    <!--End Of TextBlocks-->
+
+                    <!--TextBoxes-->
+                    <TextBox  x:Name="rentInput"
+                  Grid.Column="0"
+                  Grid.Row="0"
+                  Width="450"
+                  Height="60"
+                  VerticalContentAlignment = "Top"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left"
+                  Margin="10, 40, 5, 5" 
+                  Style="{StaticResource InputTextBox}"
+                  Text="{Binding Rental, Mode = TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <!--End Of TextBoxes-->
+
+                </Grid>
+            </StackPanel>
+            
+            <!--End Rental-->
+
+            <!--Buy Home Stack Panel-->
+            <StackPanel x:Name="buyPanel"  Grid.Column="0" Visibility="Visible" >
+
+                <Grid Height="720">
+
+                    <!--TextBlocks-->
+                    <TextBlock Text="Property Purchase Price"
+                       FontSize="22"
+                       Foreground="White"
+                       Padding="10, 10, 10, 10"/>
+
+                    <TextBlock Grid.Column="0"
+                  Grid.Row="0"
+                   Text="Property Total Deposit"
+                       FontSize="22"
+                       Foreground="White"
+                       Padding="10, 120, 10, 10"/>
+                    <TextBlock Grid.Column="0"
+                  Grid.Row="0"
+                   Text="Property Interest Rate"
+                       FontSize="22"
+                       Foreground="White"
+                       Padding="10, 240, 10, 10"/>
+                    <TextBlock Grid.Column="0"
+                  Grid.Row="0"
+                   Text="Total Months to Repay The Loan"
+                       FontSize="22"
+                       Foreground="White"
+                       Padding="10, 350, 10, 10"/>
+                    <!--End Of TextBlocks-->
+
+                    <!--TextBoxes-->
+                    <TextBox  x:Name="propPriceInput"
+                  Width="450"
+                  Height="60"
+                  VerticalContentAlignment = "Top"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left"
+                  Margin="10, 40, 5, 5" 
+                  Style="{StaticResource InputTextBox}"
+                  Text="{Binding HomePrice, Mode = TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBox  x:Name="propDepositInput"
+                  Width="450"
+                  Height="60"
+                  VerticalContentAlignment = "Top"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left"
+                  Margin="10, 155, 5, 5" 
+                  Style="{StaticResource InputTextBox}"
+                  Text="{Binding HomeDeposit, Mode = TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBox  x:Name="propInterestInput"
+                  Width="450"
+                  Height="60"
+                  VerticalContentAlignment = "Top"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left"
+                  Margin="10, 270, 5, 5" 
+                  Style="{StaticResource InputTextBox}"
+                  Text="{Binding HomeInterest, Mode = TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <!--End Of TextBoxes-->
+                    
+                    <!--Combo Box-->
+                    <ComboBox x:Name="propMonthsCB" Width="450"
+                  Height="60"
+                  FontSize="30"
+                  VerticalContentAlignment = "Top"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left"
+                  Margin="10, 380, 5, 5" 
+                  Background="Wheat">
+
+                        <ComboBoxItem x:Name="DefaultCB" Background="Wheat" Content="240"/>
+                        <ComboBoxItem Background="Wheat" Content="360"/>
+                        
+                    </ComboBox>
+                    <!--End Combo Box-->
+
+                    <!--Unlikely Home loan Warning-->
+                    <TextBlock x:Name="loanRejectedBlock"
+                          Width="450"
+                          Height="60"
+                          FontSize="30"
+                          Foreground="White"
+                          Background="OrangeRed"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Left"
+                          Visibility="Hidden"
+                          Text="Your Home Loan Is Unlikely"
+                          Margin="10, 480, 5, 5" />
+                    <!--End Warning-->
+
+
+                </Grid>
+
+            </StackPanel>
+
+            <!--End Buy Home-->
+
+            <!--Buttons-->
+            <Button Width="120"
+                Height="40"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="920, 650, 20, 0"
+                    FontSize="25"
+                    Foreground="White"
+                    Style="{StaticResource ButtonsTheme}"
+                    Click="Button_Click" Content="Save"/>
+
+            <Button x:Name="rentButton" 
+                Grid.Column="1" Grid.Row="0" 
+                    Width="120"
+                Height="40"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="575, 100, 100, 100"
+                    FontSize="25"
+                    Foreground="White"
+                    Style="{StaticResource ButtonsTheme}"
+                    Click="Rent_Click" Content="Rent"/>
+
+            <Button x:Name="buyButton"
+                Grid.Column="1" Grid.Row="0" 
+                    Width="120"
+                Height="40"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="575, 100, 100, 100"
+                    FontSize="25"
+                    Foreground="White"
+                    Visibility="Hidden"
+                    Style="{StaticResource ButtonsTheme}"                   
+                    Click="Buy_Click" Content="Buy"/>
+            <!--End Of Buttons-->
+
+
+
+        </Grid>
+    </StackPanel>
+</Page>
+    
+<!--
+███▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+██████▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░
+██████████▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░
+███████████████▓▓▒▒▒░░░░─░░░─░──░░░░░░░░
+█████▓▒▒▒▓▓▓███▓██▓▓▒▒▒░░─░─────────────
+███▓▒░░░░░▒▒▓█████████▓▒▒▒░░─────░──────
+███▒▒░░░░─░░░▒▓█████████▓▓▒▒▒░░─────────
+████▓▓▒▒░░░────░▒▓▓██████████▓▒▒▒░░░────
+███████▓▓▓▒░░░─────░▒▒▓██████████▓▓▒░░░─
+████████████████▓▒▒░──░▒▒▒▓█████████▓▒░░
+█████████████████████▓▓▓▓▒░─░░▒▓▓▓▓▓▓▒▒░
+████████████████████████████▓▒░░░░░░░░──
+███████████████████████████████▒────────
+██████████████▓▓▒▒███▓███████████▒──────
+████████████▒░───░██▓▓█████▓███████░────
+████████████▒────░███▓█████▓██▓░▓███▒───
+█████████████░────▒██▓▓██▓███▓░──░███▓──
+██████████████─────▒████████▒─────▒████─
+███████████████▒─────▓████▓──────▒▓████▒
+█████████████████▓▒──────────▒▓████████▓
+█████████████████████▓▓▓▓▓▓████████████▒
+█████████▓▓▓▒▓▓▓███████████████████████▒
+███▓████▓▒░─────░░███████████▓▓▓▓▓▓▒░░░─
+██▓▓███▒░░─────────▓████████▒░░▒▒▒░░░───
+██▓███▓░░───────────███████▓░░░░░░░─────
+██▓███░────────░────▓██████▒────────────
+█▓▓██▓─────────▓────▓█████▓░────────────
+█▓▓██░─────────█▒───▓█████▒─────────────
+█▓▓██──────────█▒───▓█████░─────────────
+█▓▓██─────────░█────▒█████──────────────
+█▓▒██─────────█░────░████▓──────────────
+█▓░▓█▓──────░█▒──────████▒──────────────
+█▓░░███░─░▒▓█▒───────████▒──────────────
+██▒─░██████▓─────────████░──────────────
+██▓░─────────────────▓███░──────────────
+██▓▒───Developed By──▒███░──────────────
+██▓▒░──Sivan Moodley─░███───────────────
+███▓░────ST10084225───███───────────────
+███▓░░────────────────██▓───────────────
+████▒░────────────────▓█▓───────────────
+████▓░────────────────▓█▒───────────────
+█████▒────────────────▒█▒───────────────
+█████▒────────────────▒█▒───────────────
+██████░───────────────▒█▒───────────────
+██████▒───────────────▒█░───────────────
+██████▓░──────────────░▓░───────────────
+███████▒──────────────░▓▒───────────────
+████████░──────────────▓▒───────────────
+████████▓░─────────────▒▒───────────────
+█████████▒─────────────▒▒───────────────
+██████████▒────────────▒░───────────────
+███████████▒───────────▒░───────────────
+███████████▓▒──────────░░───────────────
+█████████████▒─────────░░───────────────
+█████████████▓▒░────────────────────────
+-->

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="BasicExpensesPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="BudgetReport.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CarExpense.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HomeExpensesPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="SavingsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="BasicExpensesPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="BudgetReport.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CarExpense.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HomeExpensesPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SavingsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\ButtonTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\InputTextBoxTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

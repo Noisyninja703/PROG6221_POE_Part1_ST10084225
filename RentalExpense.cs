@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PROG6221_POE_Part_1
+namespace PROG6221_POE_Draft2
 {
     class RentalExpense : Expenses
     {
@@ -15,7 +15,7 @@ namespace PROG6221_POE_Part_1
         public override void CalculateExpense(double salary, double expenses, double taxAmount, double accommodation)
         {
 
-            availAmount = Math.Round(salary - (taxAmount + expenses + accommodation), 2); //Round off to 2 decimal places
+            AvailAmount = salary - (taxAmount + expenses + accommodation);
 
         }
     }

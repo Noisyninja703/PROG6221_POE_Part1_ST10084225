@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PROG6221_POE_Part_1
+﻿namespace PROG6221_POE_Draft2
 {
     abstract class Expenses
     {
 
-        //**************************************************************      Declare availAmount      *****************************************************************************************
-        public double availAmount;
+        //**************************************************************      Declare AvailAmount      *****************************************************************************************
+        static double availAmount;
+
+        public double AvailAmount { get { return availAmount; } set { availAmount = value; } }
 
         //**************************************************************      Calculate Expense      *****************************************************************************************
 
         //Create the abstract method CalculateExpense
         public abstract void CalculateExpense(double salary, double expenses, double taxAmount, double accommodation);
+
 
     }
 }

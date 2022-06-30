@@ -1,24 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PROG6221_POE_Part_1
+namespace PROG6221_POE_Draft2
 {
-
     class HomeLoanExpense : Expenses
     {
 
         //**************************************************************      Declare Variables      *****************************************************************************************
 
         //Initialize variables
-        private double thirdOfGrossSalary;
-        private double homePurchasePrice;
-        private double homeTotalDeposit;
-        private double annualInterestRate;
-        private int monthsToRepay;
-        public double monthlyAmount;
+        static double thirdOfGrossSalary;
+        static double homePurchasePrice;
+        static double homeTotalDeposit;
+        static double annualInterestRate;
+        static int monthsToRepay;
+        static double monthlyAmount;
 
         //**************************************************************      Get And Set Methods      *****************************************************************************************
 
@@ -29,6 +24,8 @@ namespace PROG6221_POE_Part_1
         public double InterestRate { get => annualInterestRate; set => annualInterestRate = value; }
         public int RepayMonths { get => monthsToRepay; set => monthsToRepay = value; }
 
+        public double MonthlyAmount { get => monthlyAmount; set => monthlyAmount = value; }
+
         //**************************************************************      Calc Monthly Bond      *****************************************************************************************
 
         //Create the CalcMonthlyBond method
@@ -36,33 +33,9 @@ namespace PROG6221_POE_Part_1
         {
 
             //Calculate the monthly payment amount
-
-            monthlyAmount = Math.Round(((homePurchasePrice - homeTotalDeposit) * (1 + (annualInterestRate / 100) * (RepayMonths / 12)) / 12), 2); //All calculations are done during the runtime, this helps reduce the need to assign memory to more variables
-
-            //Print the monthly payment amount
-            Console.WriteLine("\n*****************************************************************\n\n" +
-                              "Your Monthly Home Loan Repayment is: R" + monthlyAmount + "\n");
-
-            //If, the monthly payment is greater than a third of the user's gross salary, give them a warning
-            if (monthlyAmount > (thirdOfGrossSalary))
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Approval Of The Home Loan Is Unlikely");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.BackgroundColor = ConsoleColor.Blue;
-                Console.WriteLine("Your Home Loan Is Likely To Be Approved");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.BackgroundColor = ConsoleColor.Black;
-
-            }
-            return monthlyAmount;
+            MonthlyAmount = Math.Round((homePurchasePrice - homeTotalDeposit) * (1 + (annualInterestRate / 100) * (RepayMonths / 12)) / 12, 2); //All calculations are done during the runtime, this helps reduce the need to assign memory to more variables
+            
+            return MonthlyAmount;
 
         }
 
@@ -72,7 +45,7 @@ namespace PROG6221_POE_Part_1
         public override void CalculateExpense(double salary, double expenses, double taxAmount, double accommodation)
         {
 
-            availAmount = Math.Round(salary - (taxAmount + expenses + accommodation), 2); //Round off too 2 decimal places
+            AvailAmount = salary - (taxAmount + expenses + accommodation);
 
         }
 
@@ -135,7 +108,6 @@ namespace PROG6221_POE_Part_1
 //███████████▓▒──────────░░───────────────
 //█████████████▒─────────░░───────────────
 //█████████████▓▒░────────────────────────
-
 
 
 
